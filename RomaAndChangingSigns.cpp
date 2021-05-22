@@ -16,4 +16,27 @@ void print2d(const T& t) {
 }
 
 int main() {
+	ll n, k; cin >> n >> k;
+	vector<ll> arr(n);
+	for(ll i = 0; i < n; i++){
+		cin >> arr[i];
+	}		
+	for(ll i=0;k>0;i++){
+		if(arr[i] < 0){
+			arr[i] *= -1;
+			k--;
+		} else{
+			break;
+		}
+	}
+	sort(arr.begin(), arr.end());
+	if(k > 0){
+		if(k % 2 != 0){
+			arr[0] *= -1;	
+		}	
+	}
+	ll sum = 0;
+	for(ll i = 0; i < n; i++) sum += arr[i];
+	cout << sum << endl;
+	return 0;
 }

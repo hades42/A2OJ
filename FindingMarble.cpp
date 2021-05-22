@@ -16,4 +16,20 @@ void print2d(const T& t) {
 }
 
 int main() {
+	ll n, s, t;
+	cin >> n >> s >> t;
+	vector<ll>arr(n+1);
+	for(int i = 1; i <= n; i++){
+		cin >> arr[i];
+	}
+	ll step = 0;
+	while(arr[s] != 0 && s != t){
+		ll temp = arr[s];
+		arr[s] = 0;
+		s = temp;
+		step++;
+	}
+	if(s == t) cout << step << endl;
+	else cout << -1 << endl;
+	return 0;
 }
