@@ -16,11 +16,24 @@ void print2d(const T& t) {
 }
 
 int main() {
-	ll maxNum = 10000000;	
-	ll n; cin >> n;
-	maxNum -= n;
-	for(ll i = 0; i < n; i++){
-		cout << maxNum++ << " ";
+	ll n, m; cin >> n >> m;
+	set<ll> s;
+	for(ll i = 0; i < m; i++){
+		ll a, b; cin >> a >> b;
+		s.insert(a);
+		s.insert(b);
+	}
+	ll central;
+	for(ll i = 1; i <= n; i++){
+		if(s.count(i) == 0){
+			central = i;
+			break;
+		}
+	}
+	cout << n -1 << endl;
+	for(ll i = 1; i <= n; i++){
+		if(i == central) continue;	
+		cout << central << " " << i << endl;
 	}
 	return 0;
 }

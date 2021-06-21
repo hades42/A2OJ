@@ -16,40 +16,28 @@ void print2d(const T& t) {
 }
 
 int main() {
-	ll n; cin >> n;
-	vector<ll> arr(n);
-	vector<ll> temp(n);
-	ll sum = 0;
-	for(ll i = 0; i < n; i++){
-		cin >> arr[i];
-		sum += arr[i];
-		if(arr[i] == 0){
-			temp[i] = 1;
-		} else{
-			temp[i] = -1;
+	string in1, in2; cin >> in1 >> in2;
+	if(in1.size() != in2.size()){
+		cout << "NO" << endl;
+		return 0;
+	}
+	vector<ll> change;	
+	ll valid = 0;
+	for(ll i = 0; i < in1.size(); i++){
+		if(in1[i] != in2[i]){
+			valid++;
+			change.push_back(i);
 		}
 	}
-	ll mx = temp[0];
-	ll curr = mx;
-	for(ll i=1; i < n; i++){
-		curr = max(temp[i], temp[i] + curr);
-		mx = max(mx, curr);
+	if(valid > 2){
+		cout << "NO" << endl;
+	} else{
+		if(in1[change[0]] == in2[change[1]] && in1[change[1]] == in2[change[0]]){
+			cout << "YES" << endl;
+		} else cout << "NO" << endl;
 	}
-	cout << sum + mx << endl;
+	return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

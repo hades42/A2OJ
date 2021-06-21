@@ -16,11 +16,15 @@ void print2d(const T& t) {
 }
 
 int main() {
-	ll maxNum = 10000000;	
 	ll n; cin >> n;
-	maxNum -= n;
-	for(ll i = 0; i < n; i++){
-		cout << maxNum++ << " ";
+	vector<ll> arr(n+1); 
+	ll ans = 0;
+	for(ll i = 1; i <= n; i++){
+		cin >> arr[i];
 	}
-	return 0;
+	sort(arr.begin()+1, arr.end());
+	for(ll i = 1; i <= n; i++){
+		ans += abs(arr[i] - i);
+	}
+	cout << ans << endl;
 }

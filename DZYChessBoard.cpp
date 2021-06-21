@@ -16,11 +16,27 @@ void print2d(const T& t) {
 }
 
 int main() {
-	ll maxNum = 10000000;	
-	ll n; cin >> n;
-	maxNum -= n;
+	ll n, m; cin >> n >> m;
+	vector<vector<char>> arr(n, vector<char>(m));
 	for(ll i = 0; i < n; i++){
-		cout << maxNum++ << " ";
+		for(ll j = 0; j < m; j++){
+			cin >> arr[i][j]; 
+			 if(arr[i][j] == '-'){
+			 	continue;
+			 } else{
+			 	if((i+j) % 2 == 0){
+			 		arr[i][j] = 'B';
+			 	} else{
+			 		arr[i][j] = 'W';
+			 	}
+			 }
+		}
+	}		
+	for(ll i = 0; i < n; i++){
+		for(ll j = 0; j < m; j++){
+			cout << arr[i][j];
+		}
+		cout << endl;
 	}
 	return 0;
 }

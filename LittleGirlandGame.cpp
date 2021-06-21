@@ -16,11 +16,25 @@ void print2d(const T& t) {
 }
 
 int main() {
-	ll maxNum = 10000000;	
-	ll n; cin >> n;
-	maxNum -= n;
-	for(ll i = 0; i < n; i++){
-		cout << maxNum++ << " ";
+	string in; cin >> in;
+	vector<ll> arr(26);
+	for(ll i = 0; i < in.size(); i++){
+		arr[in[i] - 97]++;
+	}
+	ll valid = 0;
+	for(ll i = 0; i < 26; i++){
+		if(arr[i] % 2 != 0){
+			valid++;
+		}
+	}
+	if(valid == 0){
+		cout << "First" << endl;
+		return 0;
+	}
+	if(valid % 2 == 0){
+		cout << "Second" << endl;
+	} else{
+		cout << "First" << endl;
 	}
 	return 0;
 }

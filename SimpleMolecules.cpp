@@ -16,11 +16,20 @@ void print2d(const T& t) {
 }
 
 int main() {
-	ll maxNum = 10000000;	
-	ll n; cin >> n;
-	maxNum -= n;
-	for(ll i = 0; i < n; i++){
-		cout << maxNum++ << " ";
+	ll a,b,c; cin >> a >> b >> c;
+	ll sum = a + b + c;
+	if(sum % 2 == 0){
+		ll bonds = sum/2;
+		ll x = bonds - c;
+		ll y = bonds - a;
+		ll z = bonds - b;
+		if(x >= 0 && y >= 0 && z >= 0){
+			cout << x << " " << y << " " << z << endl;
+		} else{
+			cout << "Impossible" << endl;
+		}
+	} else{
+		cout << "Impossible" << endl;
 	}
 	return 0;
 }

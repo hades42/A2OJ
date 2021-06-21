@@ -16,11 +16,24 @@ void print2d(const T& t) {
 }
 
 int main() {
-	ll maxNum = 10000000;	
-	ll n; cin >> n;
-	maxNum -= n;
+	ll n; cin >> n;	
+	vector<ll> arr(n);
+	ll ans = 0;
 	for(ll i = 0; i < n; i++){
-		cout << maxNum++ << " ";
+		cin >> arr[i];
+		if(arr[i] == i) ans++;
 	}
+	ll temp = 0;
+	for(ll i = 0; i < n; i++){
+		if(arr[i] != i){
+			if(arr[arr[i]] == i){
+				ans+=2;
+				temp = 1;
+				break;
+			}
+		}
+	}
+	if(temp == 0 && ans != n) ans++;
+	cout << ans << endl;
 	return 0;
 }
