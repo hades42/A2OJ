@@ -15,7 +15,7 @@ void print2d(const T& t) {
     std::for_each(t.cbegin(), t.cend(), print<typename T::value_type>);
 }
 
-const ll maxSize = 100100;
+const ll maxSize = 200100;
 bool primes[maxSize];
 void precompute(){
 	fill(primes, primes + maxSize, true);
@@ -29,6 +29,41 @@ void precompute(){
 		}
 	}
 }
+vector<ll> tree(maxSize);
+ll n, q;
+void update(ll x, ll val){
+	while(x <= n){
+		tree[x] += val;
+		x += (x & -x);
+	}
+}
 
+ll read(ll x){
+	ll sum = 0;
+	while(x > 0){
+		sum += tree[x];
+		x -= (x & -x);
+	}
+	return sum;
+}
 int main() {
+	cin >> n >> q;
+	vector<ll> nums(n);
+	vector<ll> frequence(n+1);
+	for(ll i = 0 ; i < n; i++) cin >> nums[i];	
+	sort(nums.begin(), nums.end());
+	while(q--){
+		ll x, y; cin >> x >> y;
+		update(x, 1);
+		update(y+1, -1);
+	}	
+	for(ll i =1; i <= n; i++){
+		frequence[i-1] = read(i);
+	}
+	sort(frequence.begin(), frequence.end());
+	ll ans = 0;
+	for(ll i = 0; i < n; i++){
+		ans += nums[i] * frequence[i+1];
+	}
+	cout << ans << endl;
 }

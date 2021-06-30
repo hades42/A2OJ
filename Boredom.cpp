@@ -15,20 +15,22 @@ void print2d(const T& t) {
     std::for_each(t.cbegin(), t.cend(), print<typename T::value_type>);
 }
 
-const ll maxSize = 100100;
-bool primes[maxSize];
-void precompute(){
-	fill(primes, primes + maxSize, true);
-	primes[0] = false;
-	primes[1] = false;
-	for(ll i = 2; i*i < maxSize; i++){
-		if(primes[i]){
-			for(ll j = i + i; j < maxSize; j+= i){
-				primes[j] = false;
-			}
+int main() {
+	vector<ll> cnt(100005);
+	ll n; cin >> n;
+	ll maxi = 0;
+	for(ll i = 0; i < n; i++){
+		ll num; cin >> num;
+		cnt[num]++;
+		if(num > maxi){
+			maxi = num;
 		}
 	}
-}
-
-int main() {
+	vector<ll> dp(100005);
+	dp[0] = 0;
+	dp[1] = cnt[1];
+	for(ll i = 2; i <= maxi; i++){
+		dp[i] = max(dp[i-1], dp[i-2] + cnt[i]*i);
+	}
+	cout << dp[maxi] << endl;
 }

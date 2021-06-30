@@ -31,4 +31,23 @@ void precompute(){
 }
 
 int main() {
+	precompute();
+	ll n, m; cin >> n >> m;
+	vector<vector<ll>> matrix(n, vector<ll>(m));
+	vector<ll> row(n);
+	vector<ll> col(m);
+	for(ll i = 0; i < n; i++){
+		for(ll j = 0; j < m; j++){
+			cin >> matrix[i][j];
+			ll x = matrix[i][j];
+			while(!primes[x]){
+				++x;
+			}
+			row[i]+= (x - matrix[i][j]);
+			col[j]+= (x - matrix[i][j]);
+		}
+	}	
+	ll smallrow = *min_element(row.begin(), row.end());
+	ll smallcol = *min_element(col.begin(), col.end());
+	cout << min(smallcol, smallrow) << endl;
 }

@@ -17,25 +17,34 @@ void print2d(const T& t) {
 
 int main() {
 	ll n, v; cin >> n >> v;	
-	vector<pair<ll,ll>> arr(n+1);
+	vector<ll> arr(3005);
 	for(ll i = 1; i <= n; i++){
-		ll a, b; cin >> a >> b;
-		pair<ll, ll> p = make_pair(a,b); 
-		arr[i] = p;
+		ll a,b; cin >> a >> b;
+		arr[a] += b;
 	}
-	sort(arr.begin(), arr.end()); 
 	ll collect = 0;
-	for(ll i = 1; i <= n; i++){
-		ll able = v;
-		if(arr[i].first == i && arr[i].second >= v){
-			collect += able;
-			arr[i].second -= able;
+	for(ll i = 1; i <= 3001; i++){
+		ll left = v;
+		if(arr[i-1] >= left){
+			collect += left;
+			arr[i-1] -= left;
+			left = 0;
+		} else if (arr[i-1]){
+			collect += arr[i-1];
+			left -= arr[i-1];
+			arr[i-1] = 0;
 		}
-		while(arr[i].first == i && arr[i].second < v){
-			collect += arr[i].second;
-			able -= arr[i].second;
-			i++;
+		if(left){
+			if(arr[i] >= left){
+				collect += left;
+				arr[i] -= left;	
+			} else if(arr[i]){
+				collect += arr[i];
+				arr[i] = 0;
+				left = 0;
+			}
 		}
 	}
 	cout << collect << endl;
+	return 0;
 }

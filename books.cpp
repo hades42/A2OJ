@@ -31,4 +31,18 @@ void precompute(){
 }
 
 int main() {
+	ll n, t; cin >> n >> t;
+	vector<ll> books(n+1);
+	for(ll i = 1; i <= n; i++){
+		cin >> books[i];
+	}		
+	ll ans = 0, left = 1, sum = 0;
+	for(ll right = 1; right <= n; right++){
+		sum += books[right];
+		while(sum > t){
+			sum -= books[left++];
+		}
+		ans = max(ans, right - left + 1);
+	}
+	cout << ans << endl;
 }
